@@ -440,6 +440,46 @@ document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
 });
 
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  if (!sidebar || !backdrop) return;
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  if (isMobile) {
+    sidebar.classList.toggle('sidebar-open');
+    backdrop.classList.toggle('hidden', !sidebar.classList.contains('sidebar-open'));
+    document.body.classList.toggle('sidebar-locked', sidebar.classList.contains('sidebar-open'));
+  } else {
+    sidebar.classList.toggle('sidebar-collapsed');
+    document.body.classList.toggle('sidebar-collapsed-page', sidebar.classList.contains('sidebar-collapsed'));
+  }
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  if (!sidebar || !backdrop) return;
+  const isMobile = window.matchMedia('(max-width: 767px)').matches;
+  if (isMobile) {
+    sidebar.classList.remove('sidebar-open');
+  } else {
+    sidebar.classList.add('sidebar-collapsed');
+    document.body.classList.add('sidebar-collapsed-page');
+  }
+  backdrop.classList.add('hidden');
+  document.body.classList.remove('sidebar-locked');
+}
+
+window.addEventListener('resize', () => {
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+  if (!window.matchMedia('(max-width: 767px)').matches) {
+    sidebar.classList.remove('sidebar-open');
+    document.getElementById('sidebarBackdrop')?.classList.add('hidden');
+    document.body.classList.remove('sidebar-locked');
+  }
+});
+
 function loadAppState() {
   const saved = localStorage.getItem(STORAGE_KEY);
   if (saved) {
@@ -592,6 +632,7 @@ function navigateTo(pageId) {
   }
 
   activePage = pageId;
+  if (window.matchMedia('(max-width: 767px)').matches) closeSidebar();
 
   // Toggle page visibility
   document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
