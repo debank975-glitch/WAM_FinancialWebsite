@@ -435,10 +435,19 @@ document.addEventListener('DOMContentLoaded', () => {
   loadAppState();
   setupUserSession();
   setupIntervalUI();
+  moveChartsToPage();
   initPieCharts();
   renderCurrentPage();
   lucide.createIcons();
 });
+
+function moveChartsToPage() {
+  const chartsPanel = document.getElementById('chartsPanel');
+  const chartsPage = document.getElementById('page-charts');
+  if (chartsPanel && chartsPage && chartsPanel.parentElement !== chartsPage) {
+    chartsPage.appendChild(chartsPanel);
+  }
+}
 
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
@@ -660,6 +669,7 @@ function renderCurrentPage() {
   if (activePage === 'home') {
     renderHomeMetrics();
     renderLedgerTable();
+  } else if (activePage === 'charts') {
     updatePieCharts();
   } else if (activePage === 'quota') {
     renderBudgetPage();

@@ -147,6 +147,11 @@
           <span>Goals Page</span>
         </button>
 
+        <button onclick="navigateTo('charts')" id="nav-charts" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition text-left text-slate-300 hover:bg-church-900 hover:text-white">
+          <i data-lucide="pie-chart" class="w-4 h-4 text-fuchsia-400"></i>
+          <span>Charts</span>
+        </button>
+
         <button onclick="navigateTo('editUsers')" id="nav-editUsers" class="nav-item w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition text-left text-slate-300 hover:bg-church-900 hover:text-white">
           <i data-lucide="user-cog" class="w-4 h-4 text-cyan-400"></i>
           <span>Edit Users</span>
@@ -184,7 +189,7 @@
     <header class="bg-white border-b border-slate-200 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3 sticky top-0 z-30 shadow-sm no-print">
 
       <!-- Time Range Switcher (Requirement 1: Monthly, Quarterly, Yearly) -->
-      <div class="flex items-center space-x-2 min-w-0">
+      <div class="flex items-center gap-2 min-w-0 max-w-full">
         <button onclick="toggleSidebar()" aria-label="Toggle navigation menu" title="Toggle navigation menu" class="sidebar-toggle inline-flex items-center justify-center w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition flex-shrink-0">
           <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
@@ -200,7 +205,7 @@
       </div>
 
       <!-- Quick Action Buttons -->
-      <div class="flex items-center space-x-1.5 sm:space-x-2.5 w-full sm:w-auto justify-end">
+      <div class="flex items-center gap-1.5 sm:gap-2.5 w-full sm:w-auto justify-end flex-wrap">
         <button onclick="openModal('modalPrintReport')" class="inline-flex items-center space-x-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 transition">
           <i data-lucide="printer" class="w-3.5 h-3.5 text-slate-600"></i>
           <span class="hidden sm:inline">Print Report Sheet</span>
@@ -308,7 +313,7 @@
         </div>
 
         <!-- Visual Representation with Pie Charts (Requirement 6 & 8: Prices under pie charts) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div id="chartsPanel" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <!-- Income Distribution Pie Chart -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
@@ -400,6 +405,14 @@
 
       </div>
 
+      <!-- ==================== PAGE 7: CHARTS ==================== -->
+      <div id="page-charts" class="page-view hidden space-y-6">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <h2 class="text-lg font-bold text-slate-900">Charts</h2>
+          <p class="text-xs text-slate-500 mt-1">Income and expense distribution for the selected interval</p>
+        </div>
+      </div>
+
       <!-- ==================== PAGE 2: QUOTA PAGE (Req 2, 10, 12) ==================== -->
       <div id="page-quota" class="page-view hidden space-y-6">
 
@@ -460,7 +473,7 @@
           </div>
 
           <!-- Month Tithe Summary Banner -->
-          <div class="mt-6 pt-5 border-t border-church-800/80 grid grid-cols-3 gap-3 text-center text-xs font-mono">
+          <div class="mt-6 pt-5 border-t border-church-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs font-mono">
             <div class="bg-church-900/60 p-3 rounded-2xl border border-church-800">
               <span class="text-[10px] text-slate-400 uppercase block font-sans font-bold">Physical Cash Tithes</span>
               <span class="text-emerald-400 font-bold text-base" id="titheMonthPhysical">GH₵ 0.00</span>

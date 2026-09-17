@@ -105,9 +105,10 @@ body.sidebar-collapsed-page .app-sidebar {
   }
 
   .app-sidebar {
-    position: fixed;
+    position: fixed !important;
     inset: 0 auto 0 0;
     width: min(86vw, 20rem);
+    flex: none !important;
     min-height: 100dvh;
     transform: translateX(-105%);
     overflow-y: auto;
@@ -131,6 +132,43 @@ body.sidebar-collapsed-page .app-sidebar {
 
   header {
     min-height: 4.5rem;
+    align-items: stretch;
+  }
+
+  header > div:first-child {
+    width: 100%;
+  }
+
+  header > div:first-child > div {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  header > div:first-child > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  header .interval-btn {
+    flex-shrink: 0;
+    min-height: 2.25rem;
+  }
+
+  header > div:last-child {
+    min-width: 0;
+    width: 100%;
+    flex: 0 0 100%;
+    justify-content: stretch;
+  }
+
+  header > div:last-child > button {
+    flex: 1 1 0;
+    width: 0;
+    justify-content: center;
+    min-height: 2.5rem;
+    min-width: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .app-sidebar nav {
@@ -144,6 +182,12 @@ body.sidebar-collapsed-page .app-sidebar {
 
   .page-view {
     min-width: 0;
+  }
+
+  body > .flex-1 {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
   }
 
   .page-view .grid {
@@ -164,6 +208,86 @@ body.sidebar-collapsed-page .app-sidebar {
   select,
   textarea {
     max-width: 100%;
+    font-size: 16px;
+  }
+
+  button,
+  select,
+  input[type="checkbox"],
+  input[type="radio"] {
+    touch-action: manipulation;
+  }
+
+  .tithe-day-card {
+    min-height: 7rem;
+  }
+
+  .fixed.inset-0 {
+    align-items: flex-start;
+    padding: max(0.75rem, env(safe-area-inset-top)) 0.75rem
+      max(0.75rem, env(safe-area-inset-bottom));
+    overflow-y: auto;
+  }
+
+  .fixed.inset-0 > div {
+    width: 100%;
+    max-width: none;
+    max-height: calc(100dvh - 1.5rem);
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .fixed.inset-0 > div > form,
+  .fixed.inset-0 > div > div:not(.bg-church-950) {
+    min-width: 0;
+  }
+
+  .fixed.inset-0 .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .fixed.inset-0 form,
+  .fixed.inset-0 > div > div.p-6 {
+    padding: 1rem;
+  }
+
+  .fixed.inset-0 .pt-2.flex,
+  .fixed.inset-0 .pt-3.flex {
+    flex-wrap: wrap;
+  }
+
+  .fixed.inset-0 .pt-2.flex > button,
+  .fixed.inset-0 .pt-3.flex > button {
+    flex: 1 1 8rem;
+    min-height: 2.75rem;
+  }
+
+  #modalTitheDay .pt-2.flex > button {
+    flex-basis: 100%;
+  }
+
+  #modalTitheDay .pt-2.flex > button + button {
+    flex-basis: calc(50% - 0.25rem);
+  }
+
+  #modalPrintReport #printableReportSheet {
+    padding: 1rem;
+  }
+
+  #modalPrintReport #printableReportSheet > .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  #modalPrintReport .bg-church-950 {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  #modalPrintReport .bg-church-950 > div:last-child {
+    width: 100%;
+    justify-content: flex-end;
   }
 }
 
